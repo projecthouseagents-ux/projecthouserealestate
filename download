@@ -1,0 +1,13 @@
+# System files
+.DS_Store
+Thumbs.db
+
+# Cloudflare / Wrangler local files
+.wrangler/
+.wrangler/**
+.wrangler.toml
+.wrangler.json
+
+# Dependencies / logs
+node_modules/
+npm-debug.log*
