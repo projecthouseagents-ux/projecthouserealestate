@@ -20,10 +20,11 @@
           <span class="btn btn-outline">Ver en Idealista</span>
         </a>
       `).join('');
+      if (window.projectHouseTranslate) window.projectHouseTranslate();
     })
     .catch(err => {
       console.error('[Project House] Error cargando inmuebles:', err);
       // The existing page remains empty rather than showing stale hard-coded listings.
-      container.innerHTML = '<p class="small">La cartera se está actualizando. Vuelve a intentarlo en unos instantes.</p>';
+      container.innerHTML = '<p class="small">La cartera se está actualizando. Vuelve a intentarlo en unos instantes.</p>'; if (window.projectHouseTranslate) window.projectHouseTranslate();
     });
 })();
