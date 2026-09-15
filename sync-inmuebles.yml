@@ -1,0 +1,39 @@
+name: Sincronizar inmuebles Idealista
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */6 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Instalar dependencias
+        run: pip install requests beautifulsoup4
+
+      - name: Sincronizar cartera desde Idealista
+        run: python scripts/sync_idealista.py
+
+      - name: Publicar cambios si los hay
+        run: |
+          git config user.name "projecthouse-sync"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/inmuebles.json
+          if git diff --cached --quiet; then
+            echo "Sin cambios."
+          else
+            git commit -m "sync: actualizar inmuebles desde Idealista"
+            git push
+          fi
