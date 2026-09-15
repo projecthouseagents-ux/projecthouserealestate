@@ -20,11 +20,17 @@
           <span class="btn btn-outline">Ver en Idealista</span>
         </a>
       `).join('');
-      if (window.projectHouseTranslate) window.projectHouseTranslate();
+      // The loader runs after script.js. Re-apply the user's selected language
+      // so dynamically inserted cards never remain in Spanish.
+      if (window.projectHouseTranslate) {
+        window.projectHouseTranslate(localStorage.getItem('projecthouse-lang') || 'es');
+      }
     })
     .catch(err => {
       console.error('[Project House] Error cargando inmuebles:', err);
-      // The existing page remains empty rather than showing stale hard-coded listings.
-      container.innerHTML = '<p class="small">La cartera se está actualizando. Vuelve a intentarlo en unos instantes.</p>'; if (window.projectHouseTranslate) window.projectHouseTranslate();
+      container.innerHTML = '<p class="small">La cartera se está actualizando. Vuelve a intentarlo en unos instantes.</p>';
+      if (window.projectHouseTranslate) {
+        window.projectHouseTranslate(localStorage.getItem('projecthouse-lang') || 'es');
+      }
     });
 })();
