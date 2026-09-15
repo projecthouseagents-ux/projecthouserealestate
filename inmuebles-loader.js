@@ -17,13 +17,13 @@
           <div class="meta">${escapeHtml(p.location)}</div>
           <h2>${escapeHtml(p.title)}</h2>
           <p class="small">${escapeHtml(p.type || 'Inmueble')} · ${escapeHtml(p.price || '')}${p.rooms ? ` · ${escapeHtml(p.rooms)}` : ''}${p.area ? ` · ${escapeHtml(p.area)}` : ''}</p>
-          <span class="btn btn-outline" data-i18n="propertyView">Ver en Idealista</span>
+          <span class="btn btn-outline">Ver en Idealista</span>
         </a>
       `).join('');
     })
     .catch(err => {
       console.error('[Project House] Error cargando inmuebles:', err);
       // The existing page remains empty rather than showing stale hard-coded listings.
-      container.innerHTML = '<p class="small" data-i18n="propertyLoading">La cartera se está actualizando. Vuelve a intentarlo en unos instantes.</p>';
+      container.innerHTML = '<p class="small">La cartera se está actualizando. Vuelve a intentarlo en unos instantes.</p>';
     });
 })();
